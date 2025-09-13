@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Check working dir
+        run: |
+          if [ "$(basename $(pwd))" != "src" ]; then
+            echo "❌ Must run from src directory!"
+            exit 1
+          fi
+
+      - name: Check Xcode version
+        run: |
+          xcodebuild -version
+          XCODE_VER=$(xcodebuild -version | grep Xcode | awk '{print $2}')
+          if [[ "${XCODE_VER%%.*}" -lt 16 ]]; then
+            echo "❌ Xcode 16+ required!"
+            exit 1
+          fi
+
+      - name: Setup Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Verify Python framework symlink
+        run: |
+          FRAMEWORK_PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13"
+          if [ ! -x "$FRAMEWORK_PATH" ]; then
+            echo "❌ Expected Python 3.13 at $FRAMEWORK_PATH not found!"
+            exit 1
+          fi
+          echo "✅ Python 3.13 found at $FRAMEWORK_PATH"
+
+      - name: Prepare Python env
+        run: |
+          python3.13 --version
+          pip3 install --upgrade pip
+          pip3 install setuptools
+          pip3 install --upgrade setuptools
+
+      - name: Build CloverBootloader
+        run: |
+          cd CloverBootloader
+          pwd
+          ./buildme "" ci
+
