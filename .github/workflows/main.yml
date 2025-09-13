@@ -9,11 +9,13 @@ jobs:
   build-macos:
     runs-on: macos-latest
     steps:
+      # Чекаутим репозиторий с полной историей и тегами
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           fetch-tags: true
 
+      # Проверка версии Xcode
       - name: Check Xcode version
         run: |
           xcodebuild -version
@@ -23,11 +25,13 @@ jobs:
             exit 1
           fi
 
+      # Настройка Python 3.13
       - name: Setup Python 3.13
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
 
+      # Проверка, что Python 3.13 присутствует в framework
       - name: Verify Python framework symlink
         run: |
           FRAMEWORK_PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13"
@@ -37,6 +41,7 @@ jobs:
           fi
           echo "✅ Python 3.13 found at $FRAMEWORK_PATH"
 
+      # Подготовка Python окружения
       - name: Prepare Python env
         run: |
           python3.13 --version
@@ -44,9 +49,11 @@ jobs:
           pip3 install setuptools
           pip3 install --upgrade setuptools
 
+      # Сборка BaseTools и запуск buildme
       - name: Build CloverBootloader
         run: |
-          cd CloverBootloader
+          cd CloverBootloader/CloverBootloader
           pwd
+          ls -la
+          make -C BaseTools "BUILD_CC=clang"
           ./buildme "" ci
-
