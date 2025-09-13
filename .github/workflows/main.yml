@@ -14,13 +14,6 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Check working dir
-        run: |
-          if [ "$(basename $(pwd))" != "src" ]; then
-            echo "❌ Must run from src directory!"
-            exit 1
-          fi
-
       - name: Check Xcode version
         run: |
           xcodebuild -version
