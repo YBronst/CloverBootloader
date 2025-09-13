@@ -12,7 +12,9 @@
 /Conf
 /ConfJief
 /toolchain/
-
+/buildme
+/xbuildme
+/makeall.sh
 
 # /FileSystems/HFSPlus/
 /FileSystems/HFSPlus/Ia32/
@@ -46,6 +48,8 @@ BaseTools/Source/Python/build/BuildReport.pyc
 
 CloverPackage/revision
 CloverPackage/version
+CloverPackage/makepkg
+CloverPackage/mpkg.log
 tools
 
 
@@ -63,4 +67,5 @@ RELEASE_*/
 
 #work in progress
 *_wip
-CloverPackage/mpkg.log
+
+
