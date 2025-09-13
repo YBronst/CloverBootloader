@@ -52,7 +52,6 @@ jobs:
       # Сборка BaseTools и запуск buildme
       - name: Build CloverBootloader
         run: |
-          cd CloverBootloader/CloverBootloader
           pwd
           ls -la
           make -C BaseTools "BUILD_CC=clang"
