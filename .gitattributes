@@ -1,0 +1,4 @@
+buildme merge=ours
+xbuildme merge=ours
+makeall.sh merge=ours
+CloverPackage/makepkg merge=ours
