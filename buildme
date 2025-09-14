@@ -70,16 +70,17 @@ fi
 # ====== Main Window SetUp ======
 if [[ "$2" != "ci" ]]; then
     osascript <<EOF
-        tell application "System Events"
-            tell application "Terminal"
-                try
-                    activate
-                    set bounds of front window to {0, 23, 615, 420}
-                on error errMsg
-                    display dialog "Error setting Terminal window: " & errMsg buttons {"OK"} default button "OK" with icon caution
-                end try
-            end tell
-        end tell
+tell application "System Events"
+    tell application "Terminal"
+        try
+            activate
+            set bounds of front window to {0, 23, 615, 420}
+        on error errMsg
+            display dialog "Error setting Terminal window: " & errMsg \
+                buttons {"OK"} default button "OK" with icon caution
+        end try
+    end tell
+end tell
 EOF
 fi
 
