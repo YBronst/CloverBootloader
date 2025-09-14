@@ -66,7 +66,7 @@ if [[ "$2" != ci ]]; then
 osascript <<EOF
 tell application "Terminal"
 	activate
-	set bounds of window 1 to {29, 54, 615, 420} # my custom
+	set bounds of window 1 to {30, 54, 650, 420} # my custom
 #	set bounds of window 1 to {0, 23, 615, 420} # default
 #	set current settings of window 1 to settings set "Pro"
 #	set font name of window 1 to "Monaco"
