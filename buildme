@@ -462,8 +462,8 @@ make -C BaseTools "BUILD_CC=clang"
 
 testing() {
 echo
-echo -e "${COL_GREEN} ---------------------------------------------------------------------------------"
-echo -e "                          🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})"
+echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
+echo -e "                          🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})${COL_RESET}"
 echo -e "${COL_CYAN}                                     Test Builds${COL_RESET}"
 echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
 echo -e "\n\n\n\n\n\n\n\n\n\n\n"
@@ -513,9 +513,9 @@ echo -e "${COL_GREEN} ----------------------------------------------------------
 if [[ ! -x "$(which python3)" ]]; then
   echo -e " ${pynone}"
 fi
-echo -e "${COL_GREEN}                           🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})"
-echo -e "${COL_YELLOW}                              Default TOOLCHAIN:${COL_CYAN} $MYTOOLCHAIN${COL_WHITE}"
-echo -e "${COL_YELLOW}                     Switch to${COL_CYAN} XCODE${COL_YELLOW} can be done on${COL_CYAN} Cloverbuilds${COL_RESET}"
+echo -e "${COL_GREEN}                           🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})${COL_RESET}"
+echo -e "${COL_YELLOW}                              Default TOOLCHAIN:${COL_CYAN} $MYTOOLCHAIN${COL_RESET}"
+echo -e "${COL_YELLOW}                     Switch to${COL_CYAN} XCODE can be done on Cloverbuilds${COL_RESET}"
 if [[ -x "$(which python3)" ]]; then
   echo -e "${COL_GREEN} ---------------------- ${pyversion}${COL_GREEN} -------------------- ${COL_RESET}"
   echo -e "\n\n\n\n\n\n\n\n\n\n"
@@ -601,14 +601,14 @@ Extra
 
 menu() {
 echo
-echo -e "${COL_GREEN} ---------------------------------------------------------------------------------"
+echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
 if [[ ! -x "$(which python3)" ]]; then
   echo -e " ${pynone}"
 fi
-echo -e "${COL_GREEN}                           🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})"
-echo -e "${COL_YELLOW}                              Default TOOLCHAIN:${COL_CYAN} $MYTOOLCHAIN${COL_WHITE}"
-echo -e "${COL_YELLOW}                     Switch to${COL_CYAN} XCODE${COL_YELLOW} select:${COL_CYAN} build (with XCode)"
-echo -e "${COL_YELLOW}     Depending on your${COL_CYAN} XCODE version${COL_YELLOW} the Toolset will be${COL_CYAN} automatically chosen"
+echo -e "${COL_GREEN}                           🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})${COL_RESET}"
+echo -e "${COL_YELLOW}                              Default TOOLCHAIN:${COL_CYAN} $MYTOOLCHAIN${COL_RESET}"
+echo -e "${COL_YELLOW}                     Switch to${COL_CYAN} XCODE${COL_YELLOW} select:${COL_CYAN} build (with XCode)${COL_RESET}"
+echo -e "${COL_YELLOW}     Depending on your${COL_CYAN} XCODE version${COL_YELLOW} the Toolset will be${COL_CYAN} automatically chosen${COL_RESET}"
 if [[ -x "$(which python3)" ]]; then
   echo -e "${COL_GREEN} ---------------------- ${pyversion}${COL_GREEN} -------------------- ${COL_RESET}"
   echo -e "\n\n\n\n\n\n\n"
