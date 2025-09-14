@@ -65,7 +65,7 @@ COL_RESET=$(tput sgr0)
 if [[ "$2" != ci ]]; then
 osascript <<EOF
 tell application "Terminal"
-#	activate
+	activate
 	set bounds of window 1 to {0, 23, 615, 420}
 #	set current settings of window 1 to settings set "Pro"
 #	set font name of window 1 to "Monaco"
