@@ -84,9 +84,9 @@ jobs:
           TARGET_PATH="/Users/runner/work/CloverBootloader/CloverBootloader/CloverPackage/sym/$DMG_DIR.dmg"
           mv -f "$DMG_DIR.dmg" "$TARGET_PATH"
 
-          - name: Upload DMG artifact
-          uses: actions/upload-artifact@v3
+          - name: Upload DMG to Artifacts
+          uses: actions/upload-artifact@v4
           with:
-          name: CloverDMG
+          name: Clover-GCC-15.1.0-${{ env.GIT_SHA }}
           path: CloverPackage/sym/Clover_G_5163.dmg
 
