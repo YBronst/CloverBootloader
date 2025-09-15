@@ -73,7 +73,7 @@ jobs:
           DMG_DIR="Clover_G_${PKG_NAME#Clover_r}"
           mkdir -p "$DMG_DIR"
 
-          cp -- ./Clover_r*.pkg ./Clover_r*.pkg.md5 ./CloverISO-*.tar.lzma ./CloverV2-*.zip "$DMG_DIR"
+          cp Clover_r*.pkg Clover_r*.pkg.md5 CloverISO-*.tar.lzma CloverV2-*.zip "$DMG_DIR"
 
           hdiutil create -volname "$DMG_DIR" -srcfolder "$DMG_DIR" -ov -format UDZO "$DMG_DIR.dmg"
 
@@ -85,5 +85,6 @@ jobs:
         with:
           name: Clover_G_5163
           path: CloverPackage/sym/Clover_G_5163.dmg
+
           
 
