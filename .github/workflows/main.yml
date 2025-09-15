@@ -83,3 +83,10 @@ jobs:
           # Перемещаем DMG в целевую папку (force)
           TARGET_PATH="/Users/runner/work/CloverBootloader/CloverBootloader/CloverPackage/sym/$DMG_DIR.dmg"
           mv -f "$DMG_DIR.dmg" "$TARGET_PATH"
+
+          - name: Upload DMG artifact
+          uses: actions/upload-artifact@v3
+          with:
+          name: CloverDMG
+          path: CloverPackage/sym/Clover_G_5163.dmg
+
