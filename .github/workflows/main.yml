@@ -49,6 +49,16 @@ jobs:
           pip3 install setuptools
           pip3 install --upgrade setuptools
 
+      # Download CloverGnuBuildTools     
+      - name: Download CloverGnuBuildTools
+        run: |
+          mkdir -p toolchain/tools/download
+          cd toolchain/tools/download
+          curl -L -o CloverGnuBuildTools.zip https://github.com/YBronst/CloverBuildUtilities/releases/download/V.1.0/CloverGnuBuildTools.zip
+          unzip CloverGnuBuildTools.zip
+          cp -r CloverBuildTools/* .
+          rm -rf CloverBuildTools CloverGnuBuildTools.zip
+
       # Сборка BaseTools и запуск buildme
       - name: Build CloverBootloader
         run: |
@@ -56,3 +66,24 @@ jobs:
           ls -la
           make -C BaseTools "BUILD_CC=clang"
           ./buildme "" ci
+   
+      - name: Create DMG with Clover artifacts
+        run: |
+          cd CloverPackage/sym
+          PKG_NAME=$(ls Clover_r*.pkg | sed 's/\.pkg//')
+          DMG_DIR=Clover_G_${PKG_NAME#Clover_r}
+        
+          mkdir -p "$DMG_DIR"
+          cp Clover_r*.pkg Clover_r*.pkg.md5 CloverISO-*.tar.lzma CloverV2-*.zip "$DMG_DIR"
+        
+          hdiutil create -volname "$DMG_DIR" -srcfolder "$DMG_DIR" -ov -format UDZO "${DMG_DIR}.dmg"
+        
+          mv "${DMG_DIR}.dmg" .
+          rm -rf "$DMG_DIR"
+
+
+      - name: Upload to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Clover-GCC-15.1.0-${{ env.GIT_SHA }}
+          path: CloverPackage/sym/Clover_G_*.dmg         
