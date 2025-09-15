@@ -66,24 +66,20 @@ jobs:
           ls -la
           make -C BaseTools "BUILD_CC=clang"
           ./buildme "" ci
-   
+
+      # Создание DMG с артефактами
       - name: Create DMG with Clover artifacts
         run: |
           cd CloverPackage/sym
           PKG_NAME=$(ls Clover_r*.pkg | sed 's/\.pkg//')
           DMG_DIR=Clover_G_${PKG_NAME#Clover_r}
-        
+
           mkdir -p "$DMG_DIR"
           cp Clover_r*.pkg Clover_r*.pkg.md5 CloverISO-*.tar.lzma CloverV2-*.zip "$DMG_DIR"
-        
-          hdiutil create -volname "$DMG_DIR" -srcfolder "$DMG_DIR" -ov -format UDZO "${DMG_DIR}.dmg"
-        
-          mv "${DMG_DIR}.dmg" .
-          rm -rf "$DMG_DIR"
 
+          # Создаём DMG (перезаписываем, если уже существует)
+          hdiutil create -volname "$DMG_DIR" -srcfolder "$DMG_DIR" -ov -format UDZO "$DMG_DIR.dmg"
 
-      - name: Upload to Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Clover-GCC-15.1.0-${{ env.GIT_SHA }}
-          path: CloverPackage/sym/Clover_G_*.dmg         
+          # Перемещаем DMG в целевую папку (force)
+          TARGET_PATH="/Users/runner/work/CloverBootloader/CloverBootloader/CloverPackage/sym/$DMG_DIR.dmg"
+          mv -f "$DMG_DIR.dmg" "$TARGET_PATH"
