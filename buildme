@@ -162,7 +162,8 @@ if [[ "$SYSNAME" == Darwin ]]; then
       cd "${CLOVERROOT}"
       ./build_gcc15.sh
     else
-      MYTOOLCHAIN="XCODE$(defaults read /Applications/Xcode.app/Contents/version.plist CFBundleShortVersionString | cut -d. -f1)"
+      ver=$(defaults read /Applications/Xcode.app/Contents/version.plist CFBundleShortVersionString | cut -d. -f1)
+      MYTOOLCHAIN="XCODE$(( ver>16 ? 16 : ver ))"
     fi
   fi
 else
@@ -262,7 +263,8 @@ if [[ -z "$WORKSPACE" ]]; then
 fi
 
 echo "[BUILD CLOVER RELEASE WITH XCODE]"
-local xrel="XCODE$(defaults read /Applications/Xcode.app/Contents/version.plist CFBundleShortVersionString | cut -d. -f1)"
+local ver=$(defaults read /Applications/Xcode.app/Contents/version.plist CFBundleShortVersionString | cut -d. -f1)
+local xrel="XCODE$(( ver>16 ? 16 : ver ))"
 ./ebuild.sh -fr -mc --no-usb -D NO_GRUB_DRIVERS_EMBEDDED -t $xrel
 ./ebuild.sh -fr -D NO_GRUB_DRIVERS_EMBEDDED -t $xrel
 if [[ -x "${DIR_TOOLS}/CloverScripts/postbuild.sh" ]]; then
@@ -328,7 +330,9 @@ if [[ -x "${DIR_TOOLS}/Scripts/build.sh" ]]; then
   echo "Running custom build script"
   "${DIR_TOOLS}/Scripts/build.sh" "${CLOVERROOT}" $MYTOOLCHAIN
 else
-  local xrel="XCODE$(defaults read /Applications/Xcode.app/Contents/version.plist CFBundleShortVersionString | cut -d. -f1)"
+local ver=$(defaults read /Applications/Xcode.app/Contents/version.plist CFBundleShortVersionString | cut -d. -f1)
+local xrel="XCODE$(( ver>16 ? 16 : ver ))"
+
   ./ebuild.sh -fr -D NO_GRUB_DRIVERS_EMBEDDED -D USE_APPLE_HFSPLUS_DRIVER -t $xrel
 fi
 if [[ -x "${DIR_TOOLS}/CloverScripts/postbuild.sh" ]]; then
