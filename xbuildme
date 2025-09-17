@@ -78,13 +78,7 @@ if [[ "$2" != "ci" ]]; then
 EOF
 fi
 
-# ====== Display Menu ======
-echo -e "${COL_GREEN} ---------------------------------------------------------------------------------"
-echo -e "${COL_GREEN}                           🍀 Clover r5163 ${COL_WHITE}(SHA: 64d434947)"
-echo -e "${COL_WHITE}                              Default TOOLCHAIN: ${COL_CYAN}GCC151${COL_WHITE}"
-echo -e "${COL_WHITE}                     Switch to ${COL_CYAN}XCODE${COL_WHITE} select: ${COL_CYAN}build (with XCode)"
-echo -e "${COL_WHITE}     Depending on your ${COL_CYAN}XCODE version${COL_WHITE} the Toolset will be ${COL_CYAN}automatically chosen"
-echo -e "${COL_GREEN} ---------------------- ${COL_CYAN}Current Python version: ${COL_WHITE}Python 3.13.7${COL_GREEN} -------------------- ${COL_RESET}"
+COL_RESET=$(tput sgr0)
 
 declare -r CLOVERROOT="$PWD"
 declare -r MYTOOLCHAIN=${1:-GCC151}
@@ -268,7 +262,7 @@ make clean
 
 menu() {
 echo
-echo '------------------------------------------------------------------------'
+echo "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
 cd "${CLOVERROOT}"
 
 local lsha1="not a git repo"
@@ -277,8 +271,8 @@ if [[ -d .git ]]; then
   lsha1=$(git rev-parse --short HEAD)
 fi
 
-echo "buildme, Clover v5 r$(cat vers.txt) (SHA: $lsha1)"
-echo "TOOLCHAIN: $MYTOOLCHAIN (override example: './buildme GCC53')"
+echo "${COL_YELLOW}              TOOLCHAIN: ${COL_CYAN}$MYTOOLCHAIN ${COL_YELLOW}(override example: ${COL_CYAN}'./buildme GCC53')${COL_RESET}"
+echo "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
 echo
 PS3='Please enter your choice: '
 options=( 'build Clover'
