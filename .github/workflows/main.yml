@@ -36,6 +36,7 @@ jobs:
             exit 1
           fi
           echo "✅ Python 3.13 found at $FRAMEWORK_PATH"
+          
 
       - name: Prepare Python env
         run: |
@@ -62,21 +63,11 @@ jobs:
 
       - name: Create DMG with Clover artifacts
         run: |
-          cd CloverPackage/sym || exit 1
-
-          PKG_NAME=$(ls Clover_r*.pkg 2>/dev/null | sed 's/\.pkg//')
-          if [ -z "$PKG_NAME" ]; then
-            echo "❌ Пакет не найден, сборка DMG пропущена"
-            exit 1
-          fi
-
+          cd CloverPackage/sym
           DMG_DIR="Clover_G_${PKG_NAME#Clover_r}"
           mkdir -p "$DMG_DIR"
-
           cp Clover_r*.pkg Clover_r*.pkg.md5 CloverISO-*.tar.lzma CloverV2-*.zip "$DMG_DIR"
-
           hdiutil create -volname "$DMG_DIR" -srcfolder "$DMG_DIR" -ov -format UDZO "$DMG_DIR.dmg"
-
           TARGET_PATH="/Users/runner/work/CloverBootloader/CloverBootloader/CloverPackage/sym/$DMG_DIR.dmg"
           mv -f "$DMG_DIR.dmg" "$TARGET_PATH"
 
