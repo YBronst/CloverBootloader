@@ -521,7 +521,8 @@ echo -e "${COL_GREEN}                           🍀 Clover r${revision}${COL_YE
 echo -e "${COL_YELLOW}                              Default TOOLCHAIN:${COL_CYAN} $MYTOOLCHAIN${COL_RESET}"
 echo -e "${COL_YELLOW}                     Switch to${COL_CYAN} XCODE can be done on Cloverbuilds${COL_RESET}"
 if [[ -x "$(which python3)" ]]; then
-  echo -e "${COL_GREEN} ---------------------- ${pyversion}${COL_GREEN} -------------------- ${COL_RESET}"
+  echo -e "${COL_GREEN}                        ${pyversion}${COL_GREEN}                                  ${COL_RESET}"
+  echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
   echo -e "\n\n\n\n\n\n\n\n\n\n"
 else
   echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
@@ -614,7 +615,8 @@ echo -e "${COL_YELLOW}                              Default TOOLCHAIN:${COL_CYAN
 echo -e "${COL_YELLOW}                     Switch to${COL_CYAN} XCODE${COL_YELLOW} select:${COL_CYAN} build (with XCode)${COL_RESET}"
 echo -e "${COL_YELLOW}     Depending on your${COL_CYAN} XCODE version${COL_YELLOW} the Toolset will be${COL_CYAN} automatically chosen${COL_RESET}"
 if [[ -x "$(which python3)" ]]; then
-  echo -e "${COL_GREEN} ---------------------- ${pyversion}${COL_GREEN} -------------------- ${COL_RESET}"
+  echo -e "${COL_GREEN}                        ${pyversion}${COL_GREEN}                                  ${COL_RESET}"
+  echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
   echo -e "\n\n\n\n\n\n\n"
 else
   echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
