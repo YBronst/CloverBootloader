@@ -57,24 +57,21 @@ jobs:
       - name: Build CloverBootloader
         run: |
           pwd
-          ls -la
           make -C BaseTools "BUILD_CC=clang"
           ./buildme "" ci
 
       - name: Create DMG with Clover artifacts
         run: |
           cd CloverPackage/sym
-          DMG_DIR="Clover_G_${PKG_NAME#Clover_r}"
-          mkdir -p "$DMG_DIR"
-          cp Clover_r*.pkg Clover_r*.pkg.md5 CloverISO-*.tar.lzma CloverV2-*.zip "$DMG_DIR"
-          hdiutil create -volname "$DMG_DIR" -srcfolder "$DMG_DIR" -ov -format UDZO "$DMG_DIR.dmg"
-          TARGET_PATH="/Users/runner/work/CloverBootloader/CloverBootloader/CloverPackage/sym/$DMG_DIR.dmg"
-          mv -f "$DMG_DIR.dmg" "$TARGET_PATH"
+          mkdir -p Clover_r5163
+          cp Clover_r5163.pkg Clover_r5163.pkg.md5 CloverISO-5163.tar.lzma CloverV2-5163.zip Clover
+          hdiutil create -volname Clover_r5163 -srcfolder Clover_r5163 -ov -format UDZO Clover_r5163.dmg
+          mv -f Clover_r5163.dmg CloverPackage/sym/Clover_G_r5163.dmg
 
       - name: Upload DMG to Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Clover_G_5163
-          path: CloverPackage/sym/Clover_G_5163.dmg
+          name: Clover_G_r5163.dmg
+          path: CloverPackage/sym/Clover_G_r5163.dmg
 
           
