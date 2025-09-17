@@ -13,30 +13,29 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-  
+
       - name: Check Xcode version
         run: |
-         XCODE_VER=$(xcodebuild -version | grep Xcode | awk '{print $2}' | tr -d '[:space:]')
-         echo "Detected Xcode version: $XCODE_VER"
-         if [[ -z "$XCODE_VER" ]]; then
-         echo "❌ Failed to detect Xcode version!"
-         exit 1
-         fi
+          XCODE_VER=$(xcodebuild -version | grep Xcode | awk '{print $2}' | tr -d '[:space:]')
+          echo "Detected Xcode version: $XCODE_VER"
+          if [[ -z "$XCODE_VER" ]]; then
+            echo "❌ Failed to detect Xcode version!"
+            exit 1
+          fi
 
-         MAJOR_VER=${XCODE_VER%%.*}
-         if [[ "$MAJOR_VER" -eq 26 ]]; then
-         CHECK_VER=16
-         else
-         CHECK_VER=$MAJOR_VER
-         fi
+          MAJOR_VER=${XCODE_VER%%.*}
+          if [[ "$MAJOR_VER" -eq 26 ]]; then
+            CHECK_VER=16
+          else
+            CHECK_VER=$MAJOR_VER
+          fi
 
-         if [[ "$CHECK_VER" -lt 16 ]]; then
-         echo "❌ Xcode 16+ required!"
-         exit 1
-         fi
+          if [[ "$CHECK_VER" -lt 16 ]]; then
+            echo "❌ Xcode 16+ required!"
+            exit 1
+          fi
 
-         echo "✅ Using Xcode version $XCODE_VER (check $CHECK_VER)"
-
+          echo "✅ Using Xcode version $XCODE_VER (check $CHECK_VER)"
 
       - name: Setup Python 3.13
         uses: actions/setup-python@v5
@@ -51,7 +50,6 @@ jobs:
             exit 1
           fi
           echo "✅ Python 3.13 found at $FRAMEWORK_PATH"
-          
 
       - name: Prepare Python env
         run: |
@@ -77,16 +75,14 @@ jobs:
 
       - name: Create DMG with Clover artifacts
         run: |
-         cd CloverPackage/sym
-         mkdir -p Clover_r5163
-         cp Clover_r5163.pkg Clover_r5163.pkg.md5 CloverISO-5163.tar.lzma CloverV2-5163.zip Clover_r5163
-         hdiutil create -volname Clover_r5163 -srcfolder Clover_r5163 -ov -format UDZO Clover_r5163.dmg
-         mv -f Clover_r5163.dmg Clover_G_r5163.dmg
+          cd CloverPackage/sym
+          mkdir -p Clover_r5163
+          cp Clover_r5163.pkg Clover_r5163.pkg.md5 CloverISO-5163.tar.lzma CloverV2-5163.zip Clover_r5163
+          hdiutil create -volname Clover_r5163 -srcfolder Clover_r5163 -ov -format UDZO Clover_r5163.dmg
+          mv -f Clover_r5163.dmg Clover_G_r5163.dmg
 
       - name: Upload DMG to Artifact
-        uses: actions/upload-artifact@v4 
+        uses: actions/upload-artifact@v4
         with:
-         name: Clover_G_r5163.dmg
-         path: CloverPackage/sym/Clover_G_r5163.dmg
-
-          
+          name: Clover_G_r5163.dmg
+          path: CloverPackage/sym/Clover_G_r5163.dmg
