@@ -13,19 +13,30 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-
+  
       - name: Check Xcode version
         run: |
-          xcodebuild -version
-          XCODE_VER=$(xcodebuild -version | grep Xcode | awk '{print $2}')
-          if [[ "${XCODE_VER%%.*}" -уй 26 ]]; then
-          CHECK_VER=16
-          else
-           CHECK_VER=${XCODE_VER%%.*}
-          fi
-            echo "❌ Xcode 16+ required!"
-            exit 1
-          fi
+         XCODE_VER=$(xcodebuild -version | grep Xcode | awk '{print $2}' | tr -d '[:space:]')
+         echo "Detected Xcode version: $XCODE_VER"
+         if [[ -z "$XCODE_VER" ]]; then
+         echo "❌ Failed to detect Xcode version!"
+         exit 1
+         fi
+
+         MAJOR_VER=${XCODE_VER%%.*}
+         if [[ "$MAJOR_VER" -eq 26 ]]; then
+         CHECK_VER=16
+         else
+         CHECK_VER=$MAJOR_VER
+         fi
+
+         if [[ "$CHECK_VER" -lt 16 ]]; then
+         echo "❌ Xcode 16+ required!"
+         exit 1
+         fi
+
+         echo "✅ Using Xcode version $XCODE_VER (check $CHECK_VER)"
+
 
       - name: Setup Python 3.13
         uses: actions/setup-python@v5
