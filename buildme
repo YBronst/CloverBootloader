@@ -465,7 +465,7 @@ make -C BaseTools "BUILD_CC=clang"
 }
 
 testing() {
-echo
+echo -e "\n"
 echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
 echo -e "                          🍀 Clover r${revision}${COL_YELLOW} (SHA: ${lsha1})${COL_RESET}"
 echo -e "${COL_CYAN}                                     Test Builds${COL_RESET}"
@@ -512,7 +512,7 @@ testing
 }
 
 Extra() {
-echo
+echo -e "\n"
 echo -e "${COL_GREEN} ---------------------------------------------------------------------------------"
 if [[ ! -x "$(which python3)" ]]; then
   echo -e " ${pynone}"
@@ -605,7 +605,7 @@ Extra
 }
 
 menu() {
-echo
+echo -e "\n"
 echo -e "${COL_GREEN} ---------------------------------------------------------------------------------${COL_RESET}"
 if [[ ! -x "$(which python3)" ]]; then
   echo -e " ${pynone}"
