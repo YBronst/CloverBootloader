@@ -63,4 +63,4 @@ rm -f version revision
 ls -la sym
 open sym
 
-exit 0
+#exit 0
