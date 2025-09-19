@@ -62,7 +62,7 @@ jobs:
         run: |
           mkdir -p toolchain/tools/download
           cd toolchain/tools/download
-          curl -L -o CloverGnuBuildTools.zip https://github.com/YBronst/CloverBuildUtilities/releases/download/V.1.0/CloverBuildTools.zip
+          curl -L -o CloverBuildTools.zip https://github.com/YBronst/CloverBuildUtilities/releases/download/V.1.0/CloverBuildTools.zip
           unzip CloverBuildTools.zip
           cp -r CloverBuildTools/* .
           rm -rf CloverBuildTools CloverBuildTools.zip
