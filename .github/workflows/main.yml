@@ -62,10 +62,10 @@ jobs:
         run: |
           mkdir -p toolchain/tools/download
           cd toolchain/tools/download
-          curl -L -o CloverGnuBuildTools.zip https://github.com/YBronst/CloverBuildUtilities/releases/download/V.1.0/CloverGnuBuildTools.zip
-          unzip CloverGnuBuildTools.zip
+          curl -L -o CloverGnuBuildTools.zip https://github.com/YBronst/CloverBuildUtilities/releases/download/V.1.0/CloverBuildTools.zip
+          unzip CloverBuildTools.zip
           cp -r CloverBuildTools/* .
-          rm -rf CloverBuildTools CloverGnuBuildTools.zip
+          rm -rf CloverBuildTools CloverBuildTools.zip
 
       - name: Build CloverBootloader
         run: |
