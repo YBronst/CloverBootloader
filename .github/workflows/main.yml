@@ -88,7 +88,7 @@ jobs:
         run: |
           (cd "CloverPackage/CloverV2/EFI/CLOVER/" && zip -q "CLOVERX64.efi.zip" "CLOVERX64.efi" || exit 1)
           (cd "CloverPackage/sym/CloverISO-${{ env.CUR_TAG }}" && 7z a Clover-${{ env.CUR_TAG }}-X64.iso.7z *.iso || exit 1)
-          (cd "CloverPackage/sym/" 7z a utils.7z utils/* || exit 1)
+          (cd "CloverPackage/sym/" && 7z a utils.7z utils/* || exit 1)
           releaseItems=(CloverPackage/sym/CloverISO*/*.7z CloverPackage/sym/utils.7z CloverPackage/sym/CloverV2*.zip CloverPackage/CloverV2/EFI/CLOVER/CLOVERX64.efi.zip CloverPackage/sym/Clover_r*.pkg)
           for releaseItem in "${releaseItems[@]}"; do cp -Rf "${releaseItem}" ./ || exit 1; done
       - name: Upload to Artifacts
