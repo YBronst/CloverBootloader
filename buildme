@@ -58,6 +58,8 @@ COL_PURPLE_ITALIC=$(tput sitm; tput setaf 5) # Italic Purple
 COL_CYAN_ITALIC=$(tput sitm; tput setaf 6)   # Italic Cyan
 COL_WHITE_ITALIC=$(tput sitm; tput setaf 7)  # Italic White
 
+#Set background color
+BG_BLUE=$(tput setab 4)
 # Reset all attributes
 COL_RESET=$(tput sgr0)
 
@@ -73,6 +75,7 @@ tell application "Terminal"
 #	set font size of window 1 to "11"
 #	set normal text color of window 1 to {3341, 35186, 50092}
 #	set position of first window to {650, 420}
+	set background color of window 1 to {0, 0, 65535}
 end tell
 EOF
 fi
