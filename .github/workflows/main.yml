@@ -21,7 +21,7 @@ jobs:
           echo "CUR_TAG=$(git tag -l | tail -1)" >> $GITHUB_ENV
           echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: Install Dependencies
+      - name: Reinstall Dependencies
         run: brew reinstall p7zip
         env:
           HOMEBREW_NO_INSTALL_CLEANUP: 1
