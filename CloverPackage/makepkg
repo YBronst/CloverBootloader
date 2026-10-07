@@ -53,6 +53,11 @@ if [[ "$revision" =~ ^[0-9]+$ ]]; then
     revision="r${revision}"
 fi
 
+git_hash=$(git rev-parse --short HEAD 2>/dev/null)
+if [[ -n "$git_hash" ]]; then
+    revision="${revision}-${git_hash}"
+fi
+
 SRCROOT="${PWD}"
 SYMROOT="${SRCROOT}"/sym
 PKG_BUILD_DIR="${SYMROOT}"/package
